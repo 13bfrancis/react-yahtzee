@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 export default class Dice extends Component {
+  //based on if the die is held or not it changes background color to reflect this
   setBackgroundButton = holdVal => {
     if (holdVal) return 'grey';
     return 'darkgrey';
@@ -18,7 +19,7 @@ export default class Dice extends Component {
           <button
             key={die.id}
             style={{
-              flexBasis: '10%',
+              flexBasis: '20%',
               fontSize: '16px',
               height: '40px',
               background: `${this.setBackgroundButton(die.hold)}`

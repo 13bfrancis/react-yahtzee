@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import Refresh from '@material-ui/icons/Refresh';
 import Dice from './Dice';
+import Scorecard from './Scorecard';
 
+// This is a function that is used to create the starting die for when the initial state is set.
 const createDice = () => {
   let diceArr = [];
   for (let i = 0; i < 5; i++) {
@@ -15,12 +17,33 @@ const createDice = () => {
   return diceArr;
 };
 
+const createScoreCard = () => {
+  return {
+    ones: NaN,
+    twos: NaN,
+    threes: NaN,
+    fours: NaN,
+    fives: NaN,
+    sixes: NaN,
+    bonus: NaN,
+    fullHouse: NaN,
+    threeOfAKind: NaN,
+    fourOfAKind: NaN,
+    smallStraight: NaN,
+    largeStraight: NaN,
+    yahtzee: NaN,
+    chance: NaN
+  };
+};
+
 export default class Yahtzee extends Component {
   state = {
+    scorecard: createScoreCard(),
     dice: createDice(),
     turn: 0,
     turnOver: false
   };
+  //function to reset state values for the beginning of a game
   resetTurn = () => {
     let newDice = [];
     this.state.dice.forEach(die => {
@@ -32,6 +55,7 @@ export default class Yahtzee extends Component {
       dice: newDice
     });
   };
+  //function to increment turn as well as disable roll button
   incrementTurn = () => {
     if (this.state.turn < 2) {
       this.setState({
@@ -41,6 +65,7 @@ export default class Yahtzee extends Component {
       this.setState({ turn: this.state.turn + 1, turnOver: true });
     }
   };
+  //function to roll the dice
   rollDice = () => {
     let newRoll = [];
     this.state.dice.forEach(die => {
@@ -55,6 +80,7 @@ export default class Yahtzee extends Component {
       dice: newRoll
     });
   };
+  //function used  to hold dice
   holdDice = id => {
     let updatedDice = [];
     this.state.dice.forEach(die => {
@@ -71,17 +97,29 @@ export default class Yahtzee extends Component {
         <Button onClick={this.resetTurn}>
           <Refresh />
         </Button>
-        <div style={{ textAlign: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            width: '75vw',
+            justifyContent: 'center',
+            margin: '0 auto'
+          }}
+        >
           {this.state.turn === 0 ? (
-            <h1>Roll to Start</h1>
+            <h1 style={{ flexBasis: '100%', textAlign: 'center' }}>
+              Roll to Start
+            </h1>
           ) : (
-            <h1>Turn {this.state.turn}</h1>
+            <h1 style={{ flexBasis: '100%', textAlign: 'center' }}>
+              Turn {this.state.turn}
+            </h1>
           )}
           <Button
             disabled={this.state.turnOver}
             variant="contained"
             color="primary"
-            style={{ width: '50%', margin: '5px' }}
+            style={{ flexBasis: '100%', margin: '5px' }}
             onClick={() => {
               this.incrementTurn();
               this.rollDice();
@@ -90,6 +128,7 @@ export default class Yahtzee extends Component {
             Roll
           </Button>
           <Dice dice={this.state.dice} hold={this.holdDice} />
+          <Scorecard scorecard={this.state.scorecard} />
         </div>
       </>
     );
