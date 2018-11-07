@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -11,16 +12,19 @@ export default class Scorecard extends Component {
     return (
       <List style={{ flexBasis: '100%' }}>
         {Object.entries(this.props.scorecard).map(item => (
-          <ListItem key={item[0]}>
-            <ListItemText>{item[0]}</ListItemText>
-            <ListItemIcon>
-              {isNaN(item[1]) ? (
-                <Button style={{ fontSize: '16px' }}>-</Button>
-              ) : (
-                <Button style={{ fontSize: '16px' }}>{item[1]}</Button>
-              )}
-            </ListItemIcon>
-          </ListItem>
+          <>
+            <ListItem key={item[0]}>
+              <ListItemText>{item[0]}</ListItemText>
+              <ListItemIcon>
+                {isNaN(item[1]) ? (
+                  <Button style={{ fontSize: '16px' }}>-</Button>
+                ) : (
+                  <Button style={{ fontSize: '16px' }}>{item[1]}</Button>
+                )}
+              </ListItemIcon>
+            </ListItem>
+            <Divider />
+          </>
         ))}
       </List>
     );

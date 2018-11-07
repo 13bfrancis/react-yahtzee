@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Button from '@material-ui/core/Button';
+
 export default class Dice extends Component {
   //based on if the die is held or not it changes background color to reflect this
   setBackgroundButton = holdVal => {
@@ -10,26 +12,27 @@ export default class Dice extends Component {
     return (
       <div
         style={{
-          width: '100vw',
+          flexBasis: '100%',
           display: 'flex',
           justifyContent: 'center'
         }}
       >
         {this.props.dice.map(die => (
-          <button
+          <Button
             key={die.id}
             style={{
               flexBasis: '20%',
               fontSize: '16px',
               height: '40px',
-              background: `${this.setBackgroundButton(die.hold)}`
+              background: `${this.setBackgroundButton(die.hold)}`,
+              margin: '1%'
             }}
             onClick={() => {
               this.props.hold(die.id);
             }}
           >
             {die.value}
-          </button>
+          </Button>
         ))}
       </div>
     );
