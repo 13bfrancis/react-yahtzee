@@ -22,9 +22,14 @@ export default class Yahtzee extends Component {
     turnOver: false
   };
   resetTurn = () => {
+    let newDice = [];
+    this.state.dice.forEach(die => {
+      newDice.push({ ...die, hold: false });
+    });
     this.setState({
       turn: 0,
-      turnOver: false
+      turnOver: false,
+      dice: newDice
     });
   };
   incrementTurn = () => {
