@@ -26,6 +26,12 @@ export default class Scorecard extends Component {
             <Divider />
           </>
         ))}
+        <ListItem>
+          <ListItemText>Total Score</ListItemText>
+          <ListItemIcon>
+            <p>-</p>
+          </ListItemIcon>
+        </ListItem>
       </List>
     );
   }

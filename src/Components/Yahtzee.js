@@ -3,38 +3,7 @@ import Button from '@material-ui/core/Button';
 import Refresh from '@material-ui/icons/Refresh';
 import Dice from './Dice';
 import Scorecard from './Scorecard';
-
-// This is a function that is used to create the starting die for when the initial state is set.
-const createDice = () => {
-  let diceArr = [];
-  for (let i = 0; i < 5; i++) {
-    diceArr.push({
-      id: i + 1,
-      value: 1,
-      hold: false
-    });
-  }
-  return diceArr;
-};
-
-const createScoreCard = () => {
-  return {
-    ones: NaN,
-    twos: NaN,
-    threes: NaN,
-    fours: NaN,
-    fives: NaN,
-    sixes: NaN,
-    bonus: NaN,
-    fullHouse: NaN,
-    threeOfAKind: NaN,
-    fourOfAKind: NaN,
-    smallStraight: NaN,
-    largeStraight: NaN,
-    yahtzee: NaN,
-    chance: NaN
-  };
-};
+import { createDice, createScoreCard } from './helperFunctions';
 
 export default class Yahtzee extends Component {
   state = {
@@ -82,6 +51,7 @@ export default class Yahtzee extends Component {
   };
   //function used  to hold dice
   holdDice = id => {
+    if (this.state.turn === 0) return;
     let updatedDice = [];
     this.state.dice.forEach(die => {
       if (die.id === id) updatedDice.push({ ...die, hold: !die.hold });
