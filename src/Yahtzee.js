@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
+import Refresh from '@material-ui/icons/Refresh';
 import Dice from './Dice';
 
 const createDice = () => {
@@ -16,9 +17,25 @@ const createDice = () => {
 
 export default class Yahtzee extends Component {
   state = {
-    dice: createDice()
+    dice: createDice(),
+    turn: 0,
+    turnOver: false
   };
-
+  resetTurn = () => {
+    this.setState({
+      turn: 0,
+      turnOver: false
+    });
+  };
+  incrementTurn = () => {
+    if (this.state.turn < 2) {
+      this.setState({
+        turn: this.state.turn + 1
+      });
+    } else {
+      this.setState({ turn: this.state.turn + 1, turnOver: true });
+    }
+  };
   rollDice = () => {
     let newRoll = [];
     this.state.dice.forEach(die => {
@@ -45,18 +62,31 @@ export default class Yahtzee extends Component {
   };
   render() {
     return (
-      <div>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            this.rollDice();
-          }}
-        >
-          Roll
+      <>
+        <Button onClick={this.resetTurn}>
+          <Refresh />
         </Button>
-        <Dice dice={this.state.dice} hold={this.holdDice} />
-      </div>
+        <div style={{ textAlign: 'center' }}>
+          {this.state.turn === 0 ? (
+            <h1>Roll to Start</h1>
+          ) : (
+            <h1>Turn {this.state.turn}</h1>
+          )}
+          <Button
+            disabled={this.state.turnOver}
+            variant="contained"
+            color="primary"
+            style={{ width: '50%', margin: '5px' }}
+            onClick={() => {
+              this.incrementTurn();
+              this.rollDice();
+            }}
+          >
+            Roll
+          </Button>
+          <Dice dice={this.state.dice} hold={this.holdDice} />
+        </div>
+      </>
     );
   }
 }
