@@ -3,14 +3,15 @@ import Button from '@material-ui/core/Button';
 import Refresh from '@material-ui/icons/Refresh';
 import Dice from './Dice';
 import Scorecard from './Scorecard';
-import { createDice, createScoreCard } from './helperFunctions';
+import { createDice, createScoreCard } from '../helperFunctions';
 
 export default class Yahtzee extends Component {
   state = {
     scorecard: createScoreCard(),
     dice: createDice(),
     turn: 0,
-    turnOver: false
+    turnOver: false,
+    totalScore: 0
   };
   //function to reset state values for the beginning of a game
   resetTurn = () => {
@@ -77,14 +78,15 @@ export default class Yahtzee extends Component {
           }}
         >
           {this.state.turn === 0 ? (
-            <h1 style={{ flexBasis: '100%', textAlign: 'center' }}>
-              Roll to Start
-            </h1>
+            <h1 style={{ flexGrow: 1, marginLeft: '5px' }}>Roll to Start</h1>
           ) : (
-            <h1 style={{ flexBasis: '100%', textAlign: 'center' }}>
+            <h1 style={{ flexGrow: 1, marginLeft: '5px' }}>
               Turn {this.state.turn}
             </h1>
           )}
+          <h1 style={{ marginRight: '5px' }}>
+            Total Score: {this.state.totalScore}
+          </h1>
           <Button
             disabled={this.state.turnOver}
             variant="contained"
