@@ -108,9 +108,7 @@ export default class Yahtzee extends Component {
               Turn {this.state.turn}
             </h1>
           )}
-          <h1 style={{ marginRight: '5px' }}>
-            Total Score: {this.state.totalScore}
-          </h1>
+          <h1 style={{ marginRight: '5px' }}>Score: {this.state.totalScore}</h1>
           <Button
             disabled={this.state.turnOver}
             variant="contained"
