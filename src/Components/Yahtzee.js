@@ -110,6 +110,18 @@ export default class Yahtzee extends Component {
         <Button onClick={this.resetTurn}>
           <Refresh />
         </Button>
+        <h3
+          style={{
+            margin: 0,
+            marginRight: '5px',
+            marginTop: '5px',
+            position: 'absolute',
+            top: 0,
+            right: 0
+          }}
+        >
+          Score: {this.state.totalScore}
+        </h3>
         <div
           style={{
             display: 'flex',
@@ -119,10 +131,9 @@ export default class Yahtzee extends Component {
             margin: '0 auto'
           }}
         >
-          <h1 style={{ flexGrow: 1, marginLeft: '5px' }}>
+          <h1 style={{ flexGrow: 1, textAlign: 'center' }}>
             {this.state.message}
           </h1>
-          <h1 style={{ marginRight: '5px' }}>Score: {this.state.totalScore}</h1>
           <Button
             disabled={this.state.turnOver}
             variant="contained"
