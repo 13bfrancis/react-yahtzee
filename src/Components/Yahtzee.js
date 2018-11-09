@@ -23,7 +23,19 @@ export default class Yahtzee extends Component {
   // Class Functions ///////////////////////////////////////////
   //////////////////////////////////////////////////////////////
 
-  //function to reset state values for the beginning of a game
+  //function to reset the state values for the beginning of a game
+  resetGame = () => {
+    this.setState({
+      scorecard: createScoreCard(),
+      dice: createDice(),
+      turn: 0,
+      turnOver: false,
+      totalScore: 0,
+      message: 'Roll to Start'
+    });
+  };
+
+  //function to reset state values for the beginning of a turn
   resetTurn = () => {
     let newDice = [];
     this.state.dice.forEach(die => {
@@ -112,7 +124,7 @@ export default class Yahtzee extends Component {
   render() {
     return (
       <>
-        <Button onClick={this.resetTurn}>
+        <Button onClick={this.resetGame}>
           <Refresh />
         </Button>
         <h3
