@@ -1,30 +1,41 @@
 import React, { Component } from 'react';
 
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import { prettyName } from '../helperFunctions';
 
 export default class Scorecard extends Component {
   render() {
+    const { renderScoreline } = this.props;
     return (
       <List style={{ flexBasis: '100%' }}>
-        {Object.entries(this.props.scorecard).map(item => (
-          <ListItem key={item[0]}>
-            <ListItemText>{prettyName(item[0])}</ListItemText>
-            <ListItemIcon>
-              {isNaN(item[1]) ? (
-                <Button style={{ fontSize: '16px', color: 'lightgrey' }}>
-                  -
-                </Button> //call the function that will show what the current roll will equal
-              ) : (
-                <Button style={{ fontSize: '16px' }}>{item[1]}</Button>
-              )}
-            </ListItemIcon>
-          </ListItem>
-        ))}
+        {/* <ListItem>
+          <ListItemText>Ones</ListItemText>
+          <ListItemIcon>
+            {isNaN(this.props.scorecard.ones) ? (
+              <Button style={{ color: 'lightgrey' }}>
+                {this.props.turn === 0 ? (
+                  <>-</>
+                ) : (
+                  <>{checkScore({ id: 'ones', dice: this.props.dice })}</>
+                )}
+              </Button>
+            ) : (
+              <Button>{this.props.scorecard.ones}</Button>
+            )}
+          </ListItemIcon>
+        </ListItem> */}
+        {renderScoreline('ones')}
+        {renderScoreline('twos')}
+        {renderScoreline('threes')}
+        {renderScoreline('fours')}
+        {renderScoreline('fives')}
+        {renderScoreline('sixes')}
+        {renderScoreline('fullHouse')}
+        {renderScoreline('threeOfAKind')}
+        {renderScoreline('fourOfAKind')}
+        {renderScoreline('smallStraight')}
+        {renderScoreline('largeStraight')}
+        {renderScoreline('yahtzee')}
+        {renderScoreline('chance')}
       </List>
     );
   }

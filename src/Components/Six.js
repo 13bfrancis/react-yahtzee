@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ size = '100', fill = 'black' }) => (
+export default ({ size = '100', fill = 'black', style = {} }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     id="svg3759"
@@ -9,6 +9,7 @@ export default ({ size = '100', fill = 'black' }) => (
     height={size}
     width={size}
     fill={fill}
+    style={style}
   >
     <defs id="defs3753" />
 

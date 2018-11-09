@@ -3,7 +3,8 @@ import Button from '@material-ui/core/Button';
 import Refresh from '@material-ui/icons/Refresh';
 import Dice from './Dice';
 import Scorecard from './Scorecard';
-import { createDice, createScoreCard } from '../helperFunctions';
+import { createDice, createScoreCard, prettyName } from '../helperFunctions';
+import Scoreline from './Scoreline';
 
 export default class Yahtzee extends Component {
   state = {
@@ -62,6 +63,20 @@ export default class Yahtzee extends Component {
       dice: updatedDice
     });
   };
+  renderScoreline = id => {
+    return (
+      <Scoreline
+        id={id}
+        dice={this.state.dice
+          .map(die => die.value)
+          .sort()
+          .join('')}
+        turn={this.state.turn}
+      >
+        {prettyName(id)}
+      </Scoreline>
+    );
+  };
   render() {
     return (
       <>
@@ -100,9 +115,13 @@ export default class Yahtzee extends Component {
             Roll
           </Button>
           <Dice dice={this.state.dice} hold={this.holdDice} />
-          <Scorecard scorecard={this.state.scorecard} />
+          <Scorecard
+            renderScoreline={this.renderScoreline}
+            scorecard={this.state.scorecard}
+          />
         </div>
       </>
     );
   }
 }
+//make a function to render the component for list items here and then pass it to Scorecard as a prop
