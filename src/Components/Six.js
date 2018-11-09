@@ -9,7 +9,7 @@ export default ({ size = '100', fill = 'black', style = {} }) => (
     height={size}
     width={size}
     fill={fill}
-    style={style}
+    style={{ border: '1px solid black', ...style }}
   >
     <defs id="defs3753" />
 

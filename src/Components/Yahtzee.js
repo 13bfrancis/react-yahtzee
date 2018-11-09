@@ -11,8 +11,8 @@ export default class Yahtzee extends Component {
   // State for Yahtzee Component ///////////////////
   //////////////////////////////////////////////////
   state = {
-    scorecard: createScoreCard(),
-    dice: createDice(),
+    scorecard: createScoreCard(), //state for scorecard is defined in helperFunctions.js
+    dice: createDice(), //state for the dice is defined in helperFunctions.js
     turn: 0,
     turnOver: false,
     totalScore: 0,
@@ -36,6 +36,7 @@ export default class Yahtzee extends Component {
       message: 'Roll to Start'
     });
   };
+
   //function to increment turn as well as disable roll button
   incrementTurn = () => {
     if (this.state.turn < 2) {
@@ -51,6 +52,7 @@ export default class Yahtzee extends Component {
       });
     }
   };
+
   //function to roll the dice
   rollDice = () => {
     let newRoll = [];
@@ -66,6 +68,7 @@ export default class Yahtzee extends Component {
       dice: newRoll
     });
   };
+
   //function used  to hold dice
   holdDice = id => {
     if (this.state.turn === 0) return;
@@ -78,6 +81,7 @@ export default class Yahtzee extends Component {
       dice: updatedDice
     });
   };
+
   setScore = ({ id, score }) => {
     if (this.state.turn === 0) return;
     this.setState({
@@ -85,6 +89,7 @@ export default class Yahtzee extends Component {
     });
     this.resetTurn();
   };
+
   renderScoreline = id => {
     return (
       <Scoreline

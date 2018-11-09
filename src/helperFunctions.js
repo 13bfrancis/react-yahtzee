@@ -109,7 +109,11 @@ export const checkScore = ({ id, dice }) => {
       }
       return sum;
     case 'smallStraight':
-      if (!!dice.match(/(1234|2345|3456)/g)) {
+      if (
+        !!dice.match(
+          /(.?(1).?(2).?(3).?(4).?)|(.?(2).?(3).?(4).?(5).?)|(.?(3).?(4).?(5).?(6).?)/g
+        )
+      ) {
         return 30;
       }
       return 0;
