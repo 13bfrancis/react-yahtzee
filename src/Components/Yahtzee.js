@@ -63,15 +63,24 @@ export default class Yahtzee extends Component {
       dice: updatedDice
     });
   };
+  setScore = ({ id, score }) => {
+    if (this.state.turn === 0) return;
+    this.setState({
+      scorecard: { ...this.state.scorecard, [id]: score }
+    });
+    this.resetTurn();
+  };
   renderScoreline = id => {
     return (
       <Scoreline
+        stateID={this.state.scorecard[id]}
         id={id}
         dice={this.state.dice
           .map(die => die.value)
           .sort()
           .join('')}
         turn={this.state.turn}
+        setScore={this.setScore}
       >
         {prettyName(id)}
       </Scoreline>
@@ -115,10 +124,7 @@ export default class Yahtzee extends Component {
             Roll
           </Button>
           <Dice dice={this.state.dice} hold={this.holdDice} />
-          <Scorecard
-            renderScoreline={this.renderScoreline}
-            scorecard={this.state.scorecard}
-          />
+          <Scorecard renderScoreline={this.renderScoreline} />
         </div>
       </>
     );

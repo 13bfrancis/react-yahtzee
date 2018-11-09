@@ -11,8 +11,19 @@ export default class Scoreline extends Component {
       <ListItem>
         <ListItemText>{this.props.children}</ListItemText>
         <ListItemIcon>
-          {isNaN(this.props.id) ? (
-            <Button style={{ color: 'darkgrey' }}>
+          {isNaN(this.props.stateID) ? (
+            <Button
+              style={{ color: 'darkgrey' }}
+              onClick={() => {
+                this.props.setScore({
+                  id: this.props.id,
+                  score: checkScore({
+                    id: this.props.id,
+                    dice: this.props.dice
+                  })
+                });
+              }}
+            >
               {this.props.turn === 0 ? (
                 <>-</>
               ) : (
@@ -20,7 +31,7 @@ export default class Scoreline extends Component {
               )}
             </Button>
           ) : (
-            <Button>{this.props.id}</Button>
+            <Button>{this.props.stateID}</Button>
           )}
         </ListItemIcon>
       </ListItem>
