@@ -7,13 +7,22 @@ import { createDice, createScoreCard, prettyName } from '../helperFunctions';
 import Scoreline from './Scoreline';
 
 export default class Yahtzee extends Component {
+  //////////////////////////////////////////////////
+  // State for Yahtzee Component ///////////////////
+  //////////////////////////////////////////////////
   state = {
     scorecard: createScoreCard(),
     dice: createDice(),
     turn: 0,
     turnOver: false,
-    totalScore: 0
+    totalScore: 0,
+    message: 'Roll to Start'
   };
+
+  //////////////////////////////////////////////////////////////
+  // Class Functions ///////////////////////////////////////////
+  //////////////////////////////////////////////////////////////
+
   //function to reset state values for the beginning of a game
   resetTurn = () => {
     let newDice = [];
@@ -23,17 +32,23 @@ export default class Yahtzee extends Component {
     this.setState({
       turn: 0,
       turnOver: false,
-      dice: newDice
+      dice: newDice,
+      message: 'Roll to Start'
     });
   };
   //function to increment turn as well as disable roll button
   incrementTurn = () => {
     if (this.state.turn < 2) {
       this.setState({
-        turn: this.state.turn + 1
+        turn: this.state.turn + 1,
+        message: `Turn ${this.state.turn + 1}`
       });
     } else {
-      this.setState({ turn: this.state.turn + 1, turnOver: true });
+      this.setState({
+        turn: this.state.turn + 1,
+        turnOver: true,
+        message: 'Turn Over'
+      });
     }
   };
   //function to roll the dice
@@ -86,6 +101,9 @@ export default class Yahtzee extends Component {
       </Scoreline>
     );
   };
+  /////////////////////////////////////////////////////////
+  // JSX for the Yahtzee Component ////////////////////////
+  /////////////////////////////////////////////////////////
   render() {
     return (
       <>
@@ -101,13 +119,9 @@ export default class Yahtzee extends Component {
             margin: '0 auto'
           }}
         >
-          {this.state.turn === 0 ? (
-            <h1 style={{ flexGrow: 1, marginLeft: '5px' }}>Roll to Start</h1>
-          ) : (
-            <h1 style={{ flexGrow: 1, marginLeft: '5px' }}>
-              Turn {this.state.turn}
-            </h1>
-          )}
+          <h1 style={{ flexGrow: 1, marginLeft: '5px' }}>
+            {this.state.message}
+          </h1>
           <h1 style={{ marginRight: '5px' }}>Score: {this.state.totalScore}</h1>
           <Button
             disabled={this.state.turnOver}
@@ -128,4 +142,3 @@ export default class Yahtzee extends Component {
     );
   }
 }
-//make a function to render the component for list items here and then pass it to Scorecard as a prop
